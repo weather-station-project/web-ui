@@ -17,7 +17,7 @@ i18n
     load: 'currentOnly',
     interpolation: {
       escapeValue: false,
-      format: (value: unknown, format: string): unknown => {
+      format: (value, format) => {
         if (value instanceof Date) return moment(value).format(format)
         return value
       },
