@@ -12,15 +12,16 @@
     "prepare": "husky && bash -c 'chmod ug+x .husky/*'"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.64.2",
     "axios": "^1.7.9",
     "axios-retry": "^4.5.0",
     "i18n": "^0.15.1",
     "i18next-browser-languagedetector": "^8.0.2",
     "i18next-http-backend": "^3.0.2",
+    "moment": "^2.30.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-i18next": "^15.4.0",
-    "react-query": "^3.39.3"
+    "react-i18next": "^15.4.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
