@@ -26,8 +26,8 @@ i18n
   })
 
 i18n.on('languageChanged', (lng) => {
-  moment.locale(lng);
-  console.debug(`Language changed to '${lng}'`);
+  moment.locale(lng)
+  console.debug(`Language changed to '${lng}'`)
 })
 
 export default i18n
