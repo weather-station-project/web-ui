@@ -6,7 +6,7 @@ import moment from 'moment'
 import { Logger } from 'loglevel'
 import log from '../config/logging.ts'
 
-const localLog:  Logger = log.getLogger('i18n')
+const localLog: Logger = log.getLogger('i18n')
 
 i18n
   .use(initReactI18next)

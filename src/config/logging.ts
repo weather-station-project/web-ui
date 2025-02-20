@@ -6,7 +6,7 @@ prefix.reg(log)
 prefix.apply(log, {
   format(level, name) {
     return `${level.toUpperCase()} [${name}] -`
-  }
+  },
 })
 log.setLevel(GlobalConfig.logging.level)
 

@@ -1,27 +1,27 @@
 import log from 'loglevel'
 
 interface LoggingConfig {
-    level: log.LogLevelDesc
+  level: log.LogLevelDesc
 }
 
 export class Config {
-    logging: LoggingConfig
+  logging: LoggingConfig
 
-    constructor() {
-        this.logging = {
-            level: (this.isValuePresent('LOG_LEVEL') ? this.getValue('LOG_LEVEL') : 'debug') as unknown as log.LogLevelDesc,
-        };
+  constructor() {
+    this.logging = {
+      level: (this.isValuePresent('LOG_LEVEL') ? this.getValue('LOG_LEVEL') : 'debug') as unknown as log.LogLevelDesc,
     }
+  }
 
-    private isValuePresent(key: string): boolean {
-        return sessionStorage && sessionStorage.getItem(key) !== null && sessionStorage.getItem(key)?.trim() !== ''
-    }
+  private isValuePresent(key: string): boolean {
+    return sessionStorage && sessionStorage.getItem(key) !== null && sessionStorage.getItem(key)?.trim() !== ''
+  }
 
-    private getValue(key: string): string {
-        return sessionStorage.getItem(key) ? (sessionStorage.getItem(key)?.trim() as string) : ''
-    }
+  private getValue(key: string): string {
+    return sessionStorage.getItem(key) ? (sessionStorage.getItem(key)?.trim() as string) : ''
+  }
 
-    /*private getValueAsNumber(key: string): number {
+  /*private getValueAsNumber(key: string): number {
         return Number(this.getValue(key))
     }
 

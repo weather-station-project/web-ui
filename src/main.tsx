@@ -8,7 +8,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import log from './config/logging'
 import { Logger } from 'loglevel'
 
-const localLog:  Logger = log.getLogger('main')
+const localLog: Logger = log.getLogger('main')
 localLog.debug('Starting application')
 
 createRoot(document.getElementById('root')!).render(
