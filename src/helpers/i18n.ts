@@ -3,6 +3,10 @@ import { initReactI18next } from 'react-i18next'
 import Backend from 'i18next-http-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import moment from 'moment'
+import { Logger } from 'loglevel'
+import log from '../config/logging.ts'
+
+const localLog:  Logger = log.getLogger('i18n')
 
 i18n
   .use(initReactI18next)
@@ -31,7 +35,7 @@ i18n
 
 i18n.on('languageChanged', (lng) => {
   moment.locale(lng)
-  console.debug(`Language changed to '${lng}'`)
+  localLog.debug(`Language changed to '${lng}'`)
 })
 
 export default i18n
