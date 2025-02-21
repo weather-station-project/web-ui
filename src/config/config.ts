@@ -18,7 +18,7 @@ export class Config {
   }
 
   private getValue(key: string): string {
-    return sessionStorage.getItem(key) ? (sessionStorage.getItem(key)?.trim() as string) : ''
+    return sessionStorage && sessionStorage.getItem(key) ? (sessionStorage.getItem(key)?.trim() as string) : ''
   }
 
   /*private getValueAsNumber(key: string): number {
