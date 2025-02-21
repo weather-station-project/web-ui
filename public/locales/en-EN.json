@@ -1,5 +1,9 @@
 {
   "navigation-menu": {
-    "home": "Home"
+    "home": "Home",
+    "language-selector": {
+      "en-EN": "English",
+      "es-ES": "Spanish"
+    }
   }
 }

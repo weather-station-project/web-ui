@@ -9,18 +9,20 @@ const NavigationMenu = () => {
 
   return (
     <header>
-      <Navbar bg="primary" variant="dark">
+      <Navbar bg="primary" variant="dark" className="justify-content-between">
         <Navbar.Brand href="/">
           <img src={logo} className="d-inline-block align-top logo" alt="Logo" />
         </Navbar.Brand>
-        <Nav className="mr-auto">
+        <Nav>
           <Nav.Link href="/">{t('navigation-menu.home')}</Nav.Link>
           {/*<Nav.Link href="/historicaldata">{t('navmenu.historical_data')}</Nav.Link>
           <Nav.Link href="/measurementslist">{t('navmenu.measurements_list')}</Nav.Link>*/}
         </Nav>
-        <Nav>
-          <LanguageSelector />
-        </Nav>
+        <Navbar.Collapse className="justify-content-end">
+          <Nav>
+            <LanguageSelector />
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
     </header>
   )
