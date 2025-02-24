@@ -9,9 +9,9 @@ const NavigationMenu = () => {
 
   return (
     <header>
-      <Navbar bg="primary" variant="dark" className="justify-content-between">
+      <Navbar bg="primary" variant="dark">
         <Navbar.Brand href="/">
-          <img src={logo} className="d-inline-block align-top logo" alt="Logo" />
+          <img src={logo} className="logo" alt="Logo" />
         </Navbar.Brand>
         <Nav>
           <Nav.Link href="/">{t('navigation-menu.home')}</Nav.Link>

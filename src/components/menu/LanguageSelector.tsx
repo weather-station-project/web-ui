@@ -8,7 +8,7 @@ const languages = [
 ]
 
 const LanguageSelector = () => {
-  const { i18n } = useTranslation()
+  const { i18n, t } = useTranslation()
 
   const handleChange = async (code: string) => {
     await i18n.changeLanguage(code)
@@ -18,7 +18,7 @@ const LanguageSelector = () => {
     <div className="language-selector">
       {languages.map((lang) => (
         <button key={lang.code} onClick={() => handleChange(lang.code)} className={`language-button ${i18n.language === lang.code ? 'active' : ''}`}>
-          <img src={lang.flag} alt={lang.code} />
+          <img src={lang.flag} alt={lang.code} title={t(`language-selector.${lang.code}`)} />
         </button>
       ))}
     </div>
