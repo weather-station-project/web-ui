@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import enFlag from '/en-US.png'
 import esFlag from '/es-ES.png'
+import classNames from 'classnames'
 
 const languages = [
   { code: 'en-EN', flag: enFlag },
@@ -17,7 +18,7 @@ const LanguageSelector = () => {
   return (
     <div className="language-selector">
       {languages.map((lang) => (
-        <button key={lang.code} onClick={() => handleChange(lang.code)} className={`language-button ${i18n.language === lang.code ? 'active' : ''}`}>
+        <button key={lang.code} onClick={() => handleChange(lang.code)} className={classNames('language-button', { active: i18n.language === lang.code })}>
           <img src={lang.flag} alt={lang.code} title={t(`language-selector.${lang.code}`)} />
         </button>
       ))}
