@@ -1,33 +1,54 @@
 import log from 'loglevel'
+import { getValueFromSessionStorageByKey, isValuePresentInSessionStorage } from '../helpers/sessionStorage.helper.ts'
 
-interface LoggingConfig {
+interface ILoggingConfig {
   level: log.LogLevelDesc
 }
 
+interface IBackendConfig {
+  backendUrl: string
+  socketUrl: string
+  login: string
+  password: string
+  maxAttempts: number
+  delayInMilliseconds: number
+}
+
+interface ISocketEvents {
+  airMeasurement: string
+  groundTemperature: string
+  windMeasurement: string
+  rainfall: string
+  exception: string
+}
+
 export class Config {
-  logging: LoggingConfig
+  logging: ILoggingConfig
+  backend: IBackendConfig
+  socketEvents: ISocketEvents
 
   constructor() {
     this.logging = {
-      level: (this.isValuePresent('LOG_LEVEL') ? this.getValue('LOG_LEVEL') : 'debug') as unknown as log.LogLevelDesc,
-    }
-  }
-
-  private isValuePresent(key: string): boolean {
-    return sessionStorage && sessionStorage.getItem(key) !== null && sessionStorage.getItem(key)?.trim() !== ''
-  }
-
-  private getValue(key: string): string {
-    return sessionStorage && sessionStorage.getItem(key) ? (sessionStorage.getItem(key)?.trim() as string) : ''
-  }
-
-  /*private getValueAsNumber(key: string): number {
-        return Number(this.getValue(key))
+      level: (isValuePresentInSessionStorage('LOG_LEVEL') ? getValueFromSessionStorageByKey('LOG_LEVEL') : 'debug') as unknown as log.LogLevelDesc,
     }
 
-    private getValueAsBoolean(key: string): boolean {
-        return this.getValue(key).toLowerCase() === 'true'
-    }*/
+    this.backend = {
+      socketUrl: isValuePresentInSessionStorage('SOCKET_URL') ? getValueFromSessionStorageByKey('SOCKET_URL') : 'http://localhost:8081',
+      backendUrl: isValuePresentInSessionStorage('BACKEND_URL') ? getValueFromSessionStorageByKey('BACKEND_URL') : 'http://localhost:8080',
+      login: isValuePresentInSessionStorage('LOGIN') ? getValueFromSessionStorageByKey('LOGIN') : 'dashboard',
+      password: isValuePresentInSessionStorage('PASSWORD') ? getValueFromSessionStorageByKey('PASSWORD') : '123456',
+      maxAttempts: 20,
+      delayInMilliseconds: 1000,
+    }
+
+    this.socketEvents = {
+      exception: 'exception',
+      airMeasurement: 'emitAirMeasurement',
+      groundTemperature: 'emitGroundTemperature',
+      windMeasurement: 'emitWindMeasurement',
+      rainfall: 'emitRainfall',
+    }
+  }
 }
 
 const globalConfigInstance: Config = new Config()
