@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { ErrorBoundary } from './ErrorBoundary.tsx'
-import { Container } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 import NavigationMenu from '../menu/NavigationMenu.tsx'
 
 interface IProps {
@@ -13,7 +13,11 @@ const Layout = (props: IProps) => {
       <ErrorBoundary>
         <NavigationMenu />
       </ErrorBoundary>
-      <Container>{props.children}</Container>
+      <Container className="mt-3">
+        <Row>
+          <Col>{props.children}</Col>
+        </Row>
+      </Container>
     </>
   )
 }

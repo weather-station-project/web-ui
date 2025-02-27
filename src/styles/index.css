@@ -1,17 +1,3 @@
-/* Generic styles */
-#root {
-  margin: 0 auto;
-  width: 100%;
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-}
-
 /* Menu */
 .logo {
   margin-left: 15px;
@@ -43,4 +29,12 @@ body {
 .language-button.active {
   border: 2px solid white;
   border-radius: 4px;
+}
+
+/* Home */
+.alert-bottom {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  width: 25%;
 }

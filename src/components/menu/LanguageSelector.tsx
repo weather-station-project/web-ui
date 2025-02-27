@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import enFlag from '/en-US.png'
+import enFlag from '/en-EN.png'
 import esFlag from '/es-ES.png'
 import classNames from 'classnames'
 

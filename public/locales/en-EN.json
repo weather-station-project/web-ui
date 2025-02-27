@@ -5,5 +5,12 @@
   "language-selector": {
     "en-EN": "English",
     "es-ES": "Spanish"
+  },
+  "home": {
+    "socket-connected": "Socket connected",
+    "socket-disconnected": "Socket disconnected. Reason: {{reason}}",
+    "socket-error": "Socket error. Message: {{message}}",
+    "real-time-measurements": "Real-time measurements",
+    "real-time-description": "Measurements in real time taken from the weather station"
   }
 }

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { io, Socket } from 'socket.io-client'
 import { GlobalConfig } from '../config/config.ts'
-import { getTokenByUserPassword, resetToken } from '../helpers/auth.helper.ts'
+import { getTokenByUserPassword, resetToken } from '../helpers/auth.ts'
 import { Logger } from 'loglevel'
 import retry, { RetryOperation } from 'retry'
 import log from '../config/logging.ts'
@@ -16,7 +16,7 @@ interface ISocketError {
 
 const useSocket = (
   onConnect: () => void,
-  onDisconnect: () => void,
+  onDisconnect: (reason: DisconnectReason) => void,
   onException: (message: string) => void,
   onAirMeasurement: (message: string) => void,
   onGroundTemperature: (message: string) => void,
@@ -48,7 +48,7 @@ const useSocket = (
 
     socketRef.current.on('disconnect', (reason: DisconnectReason): void => {
       logRef.current.debug(`Socket disconnected (${reason})`)
-      onDisconnect()
+      onDisconnect(reason)
     })
 
     socketRef.current.on(GlobalConfig.socketEvents.exception, (message: string): void => {
@@ -101,6 +101,9 @@ const useSocket = (
     })
 
     operation.attempt((currentAttempt: number): void => {
+      if (socketRef.current?.connected) {
+        return
+      }
       logRef.current.debug(`Connecting socket. Attempt (${currentAttempt}/${GlobalConfig.backend.maxAttempts})`)
       socketRef.current?.connect()
 
@@ -121,9 +124,11 @@ const useSocket = (
 
   useEffect(() => {
     const socket = socketRef.current
+    const localLog = logRef.current
 
-    return () => {
+    return (): void => {
       if (socket) {
+        localLog.debug('Destroying socket helper instance')
         socket.disconnect()
       }
     }

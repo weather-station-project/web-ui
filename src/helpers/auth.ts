@@ -1,6 +1,6 @@
 import { Logger } from 'loglevel'
 import log from '../config/logging.ts'
-import { getValueFromSessionStorageByKey, isValuePresentInSessionStorage } from './sessionStorage.helper.ts'
+import { getValueFromSessionStorageByKey, isValuePresentInSessionStorage } from './sessionStorage.ts'
 
 const AUTH_TOKEN_KEY: string = 'auth_token'
 const localLog: Logger = log.getLogger('auth helper')

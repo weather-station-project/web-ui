@@ -1,5 +1,5 @@
 import log from 'loglevel'
-import { getValueFromSessionStorageByKey, isValuePresentInSessionStorage } from '../helpers/sessionStorage.helper.ts'
+import { getValueFromSessionStorageByKey, isValuePresentInSessionStorage } from '../helpers/sessionStorage.ts'
 
 interface ILoggingConfig {
   level: log.LogLevelDesc
@@ -22,10 +22,15 @@ interface ISocketEvents {
   exception: string
 }
 
+interface ITimesConfig {
+  toastDurationInMilliseconds: number
+}
+
 export class Config {
   logging: ILoggingConfig
   backend: IBackendConfig
   socketEvents: ISocketEvents
+  times: ITimesConfig
 
   constructor() {
     this.logging = {
@@ -47,6 +52,10 @@ export class Config {
       groundTemperature: 'emitGroundTemperature',
       windMeasurement: 'emitWindMeasurement',
       rainfall: 'emitRainfall',
+    }
+
+    this.times = {
+      toastDurationInMilliseconds: 3000,
     }
   }
 }
