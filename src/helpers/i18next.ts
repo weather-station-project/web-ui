@@ -7,6 +7,17 @@ import i18next from 'i18next'
 
 const localLog: Logger = log.getLogger('i18n')
 
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+export const DATETIME_FORMAT_OPTIONS = {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  timeZoneName: 'shortOffset',
+}
+
 i18next
   .use(initReactI18next)
   .use(Backend)

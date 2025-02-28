@@ -7,6 +7,7 @@ import { GlobalConfig } from '../../config/config.ts'
 import { Socket } from 'socket.io-client'
 import { IAirMeasurement, IGroundTemperature, IRainfall, IWindMeasurement, reviver } from '../../models/models.ts'
 import DisconnectReason = Socket.DisconnectReason
+import { DATETIME_FORMAT_OPTIONS } from '../../helpers/i18next.ts'
 
 const Home = () => {
   const { t } = useTranslation()
@@ -87,37 +88,37 @@ const Home = () => {
           <tr>
             <td>Air temperature (ºC)</td>
             <td>{airMeasurement?.temperature}</td>
-            <td>{airMeasurement?.dateTime.toLocaleDateString()}</td>
+            <td>{airMeasurement !== undefined && t('date', { value: airMeasurement?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
           </tr>
           <tr>
             <td>Air humidity (%)</td>
             <td>{airMeasurement?.humidity}</td>
-            <td>{airMeasurement?.dateTime.toLocaleDateString()}</td>
+            <td>{airMeasurement !== undefined && t('date', { value: airMeasurement?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
           </tr>
           <tr>
             <td>Air pressure (hPa)</td>
             <td>{airMeasurement?.pressure}</td>
-            <td>{airMeasurement?.dateTime.toLocaleDateString()}</td>
+            <td>{airMeasurement !== undefined && t('date', { value: airMeasurement?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
           </tr>
           <tr>
             <td>Ground temperature (ºC)</td>
             <td>{groundTemperature?.temperature}</td>
-            <td>{groundTemperature?.dateTime.toLocaleDateString()}</td>
+            <td>{groundTemperature !== undefined && t('date', { value: groundTemperature?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
           </tr>
           <tr>
             <td>Wind speed (km/h)</td>
             <td>{windMeasurement?.speed}</td>
-            <td>{windMeasurement?.dateTime.toLocaleDateString()}</td>
+            <td>{windMeasurement !== undefined && t('date', { value: windMeasurement?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
           </tr>
           <tr>
             <td>Wind direction</td>
             <td>{windMeasurement?.direction}</td>
-            <td>{windMeasurement?.dateTime.toLocaleDateString()}</td>
+            <td>{windMeasurement !== undefined && t('date', { value: windMeasurement?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
           </tr>
           <tr>
             <td>Rainfall (l/m2)</td>
             <td>{rainfall?.amount}</td>
-            <td>{rainfall?.dateTime.toLocaleDateString()}</td>
+            <td>{rainfall !== undefined && t('date', { value: rainfall?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
           </tr>
         </tbody>
       </Table>
