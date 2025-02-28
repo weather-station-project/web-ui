@@ -1,9 +1,30 @@
 {
+  "date": "{{value, datetime}}",
   "navigation-menu": {
     "home": "Inicio"
   },
   "language-selector": {
     "en-EN": "Inglés",
     "es-ES": "Español"
+  },
+  "home": {
+    "socket-connected": "Socket conectado",
+    "socket-disconnected": "Socket desconectado. Razón: {{reason}}",
+    "socket-error": "Socket error. Message: {{message}}",
+    "real-time-measurements": "Mediciones en tiempo real",
+    "real-time-description": "Mediciones en tiempo real tomadas de la estación meteorológica",
+    "socket-state": "Estado del socket",
+    "connected": "Conectado",
+    "disconnected": "Desconectado",
+    "measurement": "Medición",
+    "value": "Valor",
+    "last-received": "Último recibido",
+    "air-temperature": "Temperatura del aire",
+    "air-humidity": "Humedad del aire",
+    "air-pressure": "Presión del aire",
+    "ground-temperature": "Temperatura del suelo",
+    "wind-speed": "Velocidad del viento",
+    "wind-direction": "Dirección del viento",
+    "rainfall": "Precipitaciones"
   }
 }

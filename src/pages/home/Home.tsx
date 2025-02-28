@@ -67,56 +67,56 @@ const Home = () => {
       <Table striped bordered hover className="mt-4">
         <thead>
           <tr>
-            <th>Socket state</th>
+            <th>{t('home.socket-state')}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>{socketConnected ? <Alert variant="success">Connected</Alert> : <Alert variant="warning">Disconnected</Alert>}</td>
+            <td>{socketConnected ? <Alert variant="success">{t('home.connected')}</Alert> : <Alert variant="warning">{t('home.disconnected')}</Alert>}</td>
           </tr>
         </tbody>
       </Table>
       <Table striped bordered hover className="mt-4">
         <thead>
           <tr>
-            <th>Measurement</th>
-            <th>Value</th>
-            <th>Last received</th>
+            <th>{t('home.measurement')}</th>
+            <th>{t('home.value')}</th>
+            <th>{t('home.last-received')}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Air temperature (ºC)</td>
+            <td>{t('home.air-temperature')} (ºC)</td>
             <td>{airMeasurement?.temperature}</td>
             <td>{airMeasurement !== undefined && t('date', { value: airMeasurement?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
           </tr>
           <tr>
-            <td>Air humidity (%)</td>
+            <td>{t('home.air-humidity')} (%)</td>
             <td>{airMeasurement?.humidity}</td>
             <td>{airMeasurement !== undefined && t('date', { value: airMeasurement?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
           </tr>
           <tr>
-            <td>Air pressure (hPa)</td>
+            <td>{t('home.air-pressure')} (hPa)</td>
             <td>{airMeasurement?.pressure}</td>
             <td>{airMeasurement !== undefined && t('date', { value: airMeasurement?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
           </tr>
           <tr>
-            <td>Ground temperature (ºC)</td>
+            <td>{t('home.ground-temperature')} (ºC)</td>
             <td>{groundTemperature?.temperature}</td>
             <td>{groundTemperature !== undefined && t('date', { value: groundTemperature?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
           </tr>
           <tr>
-            <td>Wind speed (km/h)</td>
+            <td>{t('home.wind-speed')} (km/h)</td>
             <td>{windMeasurement?.speed}</td>
             <td>{windMeasurement !== undefined && t('date', { value: windMeasurement?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
           </tr>
           <tr>
-            <td>Wind direction</td>
+            <td>{t('home.wind-direction')}</td>
             <td>{windMeasurement?.direction}</td>
             <td>{windMeasurement !== undefined && t('date', { value: windMeasurement?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
           </tr>
           <tr>
-            <td>Rainfall (l/m2)</td>
+            <td>{t('home.rainfall')} (l/m2)</td>
             <td>{rainfall?.amount}</td>
             <td>{rainfall !== undefined && t('date', { value: rainfall?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
           </tr>

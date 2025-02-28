@@ -12,6 +12,19 @@
     "socket-disconnected": "Socket disconnected. Reason: {{reason}}",
     "socket-error": "Socket error. Message: {{message}}",
     "real-time-measurements": "Real-time measurements",
-    "real-time-description": "Measurements in real time taken from the weather station"
+    "real-time-description": "Measurements in real time taken from the weather station",
+    "socket-state": "Socket state",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "measurement": "Measurement",
+    "value": "Value",
+    "last-received": "Last received",
+    "air-temperature": "Air temperature",
+    "air-humidity": "Air humidity",
+    "air-pressure": "Air pressure",
+    "ground-temperature": "Ground temperature",
+    "wind-speed": "Wind speed",
+    "wind-direction": "Wind direction",
+    "rainfall": "Rainfall"
   }
 }
