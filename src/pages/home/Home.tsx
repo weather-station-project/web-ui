@@ -86,29 +86,74 @@ const Home = () => {
         </thead>
         <tbody>
           <tr>
-            <td>{t('home.air-temperature')} (ºC)</td>
-            <td>{airMeasurement?.temperature}</td>
-            <td>{airMeasurement !== undefined && t('date', { value: airMeasurement?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
+            <td>{t('home.air-temperature')}</td>
+            {airMeasurement !== undefined ? (
+              <>
+                <td>{airMeasurement?.temperature} (ºC)</td>
+                <td>{t('date', { value: airMeasurement?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
+              </>
+            ) : (
+              <>
+                <td></td>
+                <td></td>
+              </>
+            )}
           </tr>
           <tr>
-            <td>{t('home.air-humidity')} (%)</td>
-            <td>{airMeasurement?.humidity}</td>
-            <td>{airMeasurement !== undefined && t('date', { value: airMeasurement?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
+            <td>{t('home.air-humidity')}</td>
+            {airMeasurement !== undefined ? (
+              <>
+                <td>{airMeasurement?.humidity} (%)</td>
+                <td>{t('date', { value: airMeasurement?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
+              </>
+            ) : (
+              <>
+                <td></td>
+                <td></td>
+              </>
+            )}
           </tr>
           <tr>
-            <td>{t('home.air-pressure')} (hPa)</td>
-            <td>{airMeasurement?.pressure}</td>
-            <td>{airMeasurement !== undefined && t('date', { value: airMeasurement?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
+            <td>{t('home.air-pressure')}</td>
+            {airMeasurement !== undefined ? (
+              <>
+                <td>{airMeasurement?.pressure} (hPa)</td>
+                <td>{t('date', { value: airMeasurement?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
+              </>
+            ) : (
+              <>
+                <td></td>
+                <td></td>
+              </>
+            )}
           </tr>
           <tr>
-            <td>{t('home.ground-temperature')} (ºC)</td>
-            <td>{groundTemperature?.temperature}</td>
-            <td>{groundTemperature !== undefined && t('date', { value: groundTemperature?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
+            <td>{t('home.ground-temperature')}</td>
+            {groundTemperature !== undefined ? (
+              <>
+                <td>{groundTemperature?.temperature} (ºC)</td>
+                <td>{t('date', { value: groundTemperature?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
+              </>
+            ) : (
+              <>
+                <td></td>
+                <td></td>
+              </>
+            )}
           </tr>
           <tr>
-            <td>{t('home.wind-speed')} (km/h)</td>
-            <td>{windMeasurement?.speed}</td>
-            <td>{windMeasurement !== undefined && t('date', { value: windMeasurement?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
+            <td>{t('home.wind-speed')}</td>
+            {windMeasurement !== undefined ? (
+              <>
+                <td>{windMeasurement?.speed} (km/h)</td>
+                <td>{t('date', { value: windMeasurement?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
+              </>
+            ) : (
+              <>
+                <td></td>
+                <td></td>
+              </>
+            )}
           </tr>
           <tr>
             <td>{t('home.wind-direction')}</td>
@@ -116,9 +161,18 @@ const Home = () => {
             <td>{windMeasurement !== undefined && t('date', { value: windMeasurement?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
           </tr>
           <tr>
-            <td>{t('home.rainfall')} (l/m2)</td>
-            <td>{rainfall?.amount}</td>
-            <td>{rainfall !== undefined && t('date', { value: rainfall?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
+            <td>{t('home.rainfall')}</td>
+            {rainfall !== undefined ? (
+              <>
+                <td>{rainfall?.amount} (l/m2)</td>
+                <td>{t('date', { value: rainfall?.dateTime, formatParams: { value: DATETIME_FORMAT_OPTIONS } })}</td>
+              </>
+            ) : (
+              <>
+                <td></td>
+                <td></td>
+              </>
+            )}
           </tr>
         </tbody>
       </Table>
