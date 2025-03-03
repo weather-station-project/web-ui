@@ -1,6 +1,10 @@
 import log from 'loglevel'
 import { getValueFromSessionStorageByKey, isValuePresentInSessionStorage } from '../helpers/sessionStorage.ts'
 
+interface IEnvironmentConfig {
+  isProduction: boolean
+}
+
 interface ILoggingConfig {
   level: log.LogLevelDesc
 }
@@ -27,12 +31,17 @@ interface ITimesConfig {
 }
 
 export class Config {
+  environment: IEnvironmentConfig
   logging: ILoggingConfig
   backend: IBackendConfig
   socketEvents: ISocketEvents
   times: ITimesConfig
 
   constructor() {
+    this.environment = {
+      isProduction: import.meta.env.PROD,
+    }
+
     this.logging = {
       level: (isValuePresentInSessionStorage('LOG_LEVEL') ? getValueFromSessionStorageByKey('LOG_LEVEL') : 'debug') as unknown as log.LogLevelDesc,
     }

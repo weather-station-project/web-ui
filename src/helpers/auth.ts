@@ -1,6 +1,7 @@
 import { Logger } from 'loglevel'
 import log from '../config/logging.ts'
 import { getValueFromSessionStorageByKey, isValuePresentInSessionStorage } from './sessionStorage.ts'
+import { GlobalConfig } from '../config/config.ts'
 
 const AUTH_TOKEN_KEY: string = 'auth_token'
 const localLog: Logger = log.getLogger('auth helper')
@@ -9,12 +10,7 @@ export interface IToken {
   access_token: string
 }
 
-export interface IAuthFields {
-  login: string
-  password: string
-}
-
-export async function getTokenByUserPassword(apiUrl: string, authFields: IAuthFields): Promise<string | undefined> {
+export async function getToken(): Promise<string | undefined> {
   const token: string | undefined = getTokenFromSessionStorage()
 
   if (token) {
@@ -22,15 +18,17 @@ export async function getTokenByUserPassword(apiUrl: string, authFields: IAuthFi
   }
 
   localLog.debug('Getting token from the Backend Api')
-  const response: Response = await fetch(`${apiUrl}/auth`, {
+  const response: Response = await fetch(`${GlobalConfig.backend.backendUrl}/auth`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      login: authFields.login,
-      password: authFields.password,
-    }),
+    body: GlobalConfig.environment.isProduction
+      ? undefined
+      : JSON.stringify({
+          login: GlobalConfig.backend.login,
+          password: GlobalConfig.backend.password,
+        }), // On PROD, the values are injected by the nginx proxy
   })
 
   return await getTokenFromResponse(response)

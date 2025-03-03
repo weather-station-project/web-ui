@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { io, Socket } from 'socket.io-client'
 import { GlobalConfig } from '../config/config.ts'
-import { getTokenByUserPassword, resetToken } from '../helpers/auth.ts'
+import { getToken, resetToken } from '../helpers/auth.ts'
 import { Logger } from 'loglevel'
 import retry, { RetryOperation } from 'retry'
 import log from '../config/logging.ts'
@@ -34,7 +34,7 @@ const useSocket = (
       reconnection: false,
       auth: async (getTokenMethod): Promise<void> => {
         getTokenMethod({
-          token: await getTokenByUserPassword(GlobalConfig.backend.backendUrl, { login: GlobalConfig.backend.login, password: GlobalConfig.backend.password }),
+          token: await getToken(),
         })
       },
     })
