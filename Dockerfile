@@ -5,7 +5,7 @@ WORKDIR /app
 COPY . .
 
 RUN apk add --no-cache openssl && \
-    npm clean-install --ignore-scripts --omit=dev && \
+    npm clean-install --ignore-scripts && \
     npm run build
 
 FROM nginx:stable-alpine
@@ -21,7 +21,7 @@ COPY --from=builder /app/dist/ /usr/share/nginx/html/
 
 # Add permissions for nginx user
 RUN chown -R nginx:nginx /usr/share/nginx/html && \
-    chmod -R 755 /usr/share/nginx/html && \
+    chmod -R 744 /usr/share/nginx/html && \
     chown -R nginx:nginx /var/cache/nginx && \
     chown -R nginx:nginx /var/log/nginx && \
     chown -R nginx:nginx /etc/nginx/conf.d
