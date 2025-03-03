@@ -49,8 +49,8 @@ export class Config {
     this.backend = {
       socketUrl: isValuePresentInSessionStorage('SOCKET_URL') ? getValueFromSessionStorageByKey('SOCKET_URL') : 'http://localhost:8081',
       backendUrl: isValuePresentInSessionStorage('BACKEND_URL') ? getValueFromSessionStorageByKey('BACKEND_URL') : 'http://localhost:8080',
-      login: isValuePresentInSessionStorage('LOGIN') ? getValueFromSessionStorageByKey('LOGIN') : 'dashboard',
-      password: isValuePresentInSessionStorage('PASSWORD') ? getValueFromSessionStorageByKey('PASSWORD') : '123456',
+      login: 'dashboard', // Replaced by the nginx proxy on PROD
+      password: '123456', // Replaced by the nginx proxy on PROD
       maxAttempts: 20,
       delayInMilliseconds: 1000,
     }
