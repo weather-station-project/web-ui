@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc --build && vite build",
     "lint": "eslint src --max-warnings 0 --fix",
     "format": "prettier src --write",
     "preview": "vite preview",
