@@ -30,7 +30,7 @@ RUN touch /var/run/nginx.pid && \
     chown -R nginx:nginx /var/run/nginx.pid
 
 USER nginx
-EXPOSE 8080
+EXPOSE 5173
 
 # Entrypoint
 CMD ash -c "envsubst < /usr/share/nginx/html/env-template.js > /usr/share/nginx/html/env.js && \
