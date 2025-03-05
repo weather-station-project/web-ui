@@ -33,6 +33,5 @@ USER nginx
 EXPOSE 5173
 
 # Entrypoint
-CMD ash -c "envsubst < /usr/share/nginx/html/env-template.js > /usr/share/nginx/html/env.js && \
-            envsubst '\$LOGIN \$PASSWORD' < /etc/nginx/conf.d/configfile.template > /etc/nginx/conf.d/default.conf && \
+CMD ash -c "envsubst '\$LOGIN \$PASSWORD' < /etc/nginx/conf.d/configfile.template > /etc/nginx/conf.d/default.conf && \
             nginx -g 'daemon off;'"

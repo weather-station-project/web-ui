@@ -1,7 +1,6 @@
 import { Logger } from 'loglevel'
 import log from '../config/logging.ts'
 import { getValueFromSessionStorageByKey, isValuePresentInSessionStorage } from './sessionStorage.ts'
-import { GlobalConfig } from '../config/config.ts'
 
 const AUTH_TOKEN_KEY: string = 'auth_token'
 const localLog: Logger = log.getLogger('auth helper')
@@ -18,18 +17,7 @@ export async function getToken(): Promise<string | undefined> {
   }
 
   localLog.debug('Getting token from the Backend Api')
-  const response: Response = await fetch(`${GlobalConfig.backend.backendUrl}/auth`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: GlobalConfig.environment.isProduction
-      ? undefined
-      : JSON.stringify({
-          login: GlobalConfig.backend.login,
-          password: GlobalConfig.backend.password,
-        }), // On PROD, the values are injected by the nginx proxy
-  })
+  const response: Response = await fetch('/api/auth', { method: 'POST' })
 
   return await getTokenFromResponse(response)
 }

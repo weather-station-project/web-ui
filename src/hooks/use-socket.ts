@@ -28,7 +28,7 @@ const useSocket = (
   const tryingConnectionRef = useRef<boolean>(false)
 
   if (!socketRef.current) {
-    socketRef.current = io(GlobalConfig.backend.socketUrl, {
+    socketRef.current = io({
       transports: ['websocket'],
       autoConnect: false,
       reconnection: false,
