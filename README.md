@@ -48,3 +48,7 @@ export default tseslint.config({
   },
 })
 ```
+
+```
+docker build --tag=test . && docker run --rm -e LOGIN=dashboard -e PASSWORD=1234567 -e BACKEND_URL=http://host.docker.internal:8080 -e SOCKET_URL=http://host.docker.internal:8081 -p "5173:5173" test
+```

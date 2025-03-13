@@ -4,14 +4,18 @@ WORKDIR /app
 
 COPY . .
 
+# Install openssl and build the project
 RUN apk add --no-cache openssl && \
     npm clean-install --ignore-scripts && \
     npm run build
 
 FROM openresty/openresty:alpine
 
-# Install gettext for envsubst
-RUN apk add --no-cache gettext
+# Install curl, perl and gettext
+RUN apk add --no-cache curl perl gettext
+
+# Install lua-resty-http
+RUN opm get ledgetech/lua-resty-http
 
 # Copy nginx configuration files
 COPY nginx-configs/nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
