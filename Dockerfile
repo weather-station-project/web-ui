@@ -32,8 +32,8 @@ RUN touch /var/run/nginx.pid
 # Create logs folder
 RUN mkdir -p /var/log/nginx
 
-EXPOSE 5173
+EXPOSE 8443
 
 # Entrypoint
-CMD ash -c "envsubst '\$LOGIN \$PASSWORD \$BACKEND_URL \$SOCKET_URL \$DNS_RESOLVER' < /etc/nginx/conf.d/configfile.template > /etc/nginx/conf.d/default.conf && \
+CMD ash -c "envsubst '\$LOGIN \$PASSWORD \$BACKEND_URL \$SOCKET_URL \$DNS_RESOLVER \$KEY_FILE \$CERT_FILE' < /etc/nginx/conf.d/configfile.template > /etc/nginx/conf.d/default.conf && \
             nginx -g 'daemon off;'"
