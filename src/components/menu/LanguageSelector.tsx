@@ -19,7 +19,7 @@ const LanguageSelector = () => {
     <div className="language-selector">
       {languages.map((lang) => (
         <button key={lang.code} onClick={() => handleChange(lang.code)} className={classNames('language-button', { active: i18n.language === lang.code })}>
-          <img src={lang.flag} alt={lang.code} title={t(`language-selector.${lang.code}`)} />
+          <img data-testid={lang.code} src={lang.flag} alt={lang.code} title={t(`language-selector.${lang.code}`)} />
         </button>
       ))}
     </div>
