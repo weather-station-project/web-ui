@@ -62,7 +62,7 @@ const Home = () => {
 
   return (
     <>
-      <h1>{t('home.real-time-measurements')}</h1>
+      <h1 data-testid="home.title">{t('home.real-time-measurements')}</h1>
       <p>{t('home.real-time-description')}</p>
       <Table striped bordered hover className="mt-4">
         <thead>
