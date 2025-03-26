@@ -16,8 +16,7 @@
     "prepare": "husky && bash -c 'chmod ug+x .husky/*'",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "e2e": "npm run dev wait-on http-get://localhost:5173 && npm run cy:run",
-    "e2e-gui": "npm run dev wait-on http-get://localhost:5173 && npm run cy:open"
+    "cy:test": "start-server-and-test dev http-get://localhost:5173 cy:run"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.64.2",
@@ -53,9 +52,9 @@
     "globals": "^15.14.0",
     "husky": "^9.1.7",
     "prettier": "^3.4.2",
+    "start-server-and-test": "^2.0.11",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.18.2",
-    "vite": "^6.0.5",
-    "wait-on": "^8.0.3"
+    "vite": "^6.0.5"
   }
 }
