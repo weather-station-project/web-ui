@@ -1,6 +1,18 @@
 describe('Home', (): void => {
   beforeEach((): void => {
+    cy.intercept(
+      {
+        method: 'GET',
+        url: '/api/auth',
+      },
+      { access_token: '1234567890' }
+    ).as('getAuthToken')
+
     cy.visit('/')
+  })
+
+  afterEach((): void => {
+    cy.wait('@getAuthToken').its('response.statusCode').should('equal', 200)
   })
 
   it('root elements should be there', (): void => {
