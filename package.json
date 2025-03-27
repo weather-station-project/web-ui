@@ -15,8 +15,10 @@
     "preview": "vite preview",
     "prepare": "husky && bash -c 'chmod ug+x .husky/*'",
     "cy:open": "cypress open",
-    "cy:run": "cypress run",
-    "cy:test": "start-server-and-test dev http-get://localhost:5173 cy:run"
+    "cy:run-e2e": "cypress run --e2e",
+    "cy:run-comp": "cypress run --component",
+    "cy:test-e2e": "start-server-and-test dev http-get://localhost:5173 cy:run-e2e",
+    "cy:test-comp": "start-server-and-test dev http-get://localhost:5173 cy:run-comp"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.64.2",
