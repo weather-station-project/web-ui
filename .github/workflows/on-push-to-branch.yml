@@ -23,16 +23,15 @@ jobs:
           build: npm run build
           start: npm run dev
           runTests: false
+          wait-on: 'http://localhost:5173'
       - name: Cypress run E2E tests
         uses: cypress-io/github-action@v6
         with:
           install: false
-          wait-on: 'http://localhost:5173'
       - name: Cypress run component tests
         uses: cypress-io/github-action@v6
         with:
           install: false
-          wait-on: 'http://localhost:5173'
           component: true
   build:
     runs-on: ubuntu-latest
