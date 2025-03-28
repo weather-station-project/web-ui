@@ -28,7 +28,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           install: false
-      - run: killall -9 npm
+      - run: killall -9 node
       - name: Cypress run component tests
         uses: cypress-io/github-action@v6
         with:
