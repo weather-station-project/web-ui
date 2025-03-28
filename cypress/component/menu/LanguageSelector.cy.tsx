@@ -3,7 +3,7 @@ import LanguageSelector from '../../../src/components/menu/LanguageSelector'
 import { I18nextProvider } from 'react-i18next'
 import i18next from '../../../src/helpers/i18next'
 
-describe('<LanguageSelector />', (): void => {
+describe('LanguageSelector', (): void => {
   beforeEach((): void => {
     cy.stub(i18next, 'changeLanguage').as('changeLanguage').resolves()
 
