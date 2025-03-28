@@ -17,18 +17,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Start the server
+      - name: Cypress run E2E tests
         uses: cypress-io/github-action@v6
         with:
           start: npm run dev
           wait-on: 'http://localhost:5173'
-          runTests: false
-      - name: Cypress run E2E tests
-        uses: cypress-io/github-action@v6
       - name: Cypress run component tests
         uses: cypress-io/github-action@v6
         with:
           install: false
+          wait-on: 'http://localhost:5173'
           component: true
   build:
     runs-on: ubuntu-latest
