@@ -20,13 +20,13 @@ jobs:
       - name: Cypress run E2E tests
         uses: cypress-io/github-action@v6
         with:
-          start: npm dev
+          start: npm run dev
           wait-on: 'http://localhost:5173'
       - name: Cypress run component tests
         uses: cypress-io/github-action@v6
         with:
           install: false
-          start: npm dev
+          start: npm run dev
           wait-on: 'http://localhost:5173'
           component: true
   build:
