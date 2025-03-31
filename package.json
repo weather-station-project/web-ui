@@ -17,8 +17,7 @@
     "cy:open": "cypress open",
     "cy:run-e2e": "cypress run --e2e",
     "cy:run-comp": "cypress run --component",
-    "cy:test-e2e": "start-server-and-test dev http-get://localhost:5173 cy:run-e2e",
-    "cy:test-comp": "start-server-and-test dev http-get://localhost:5173 cy:run-comp"
+    "cy:test-e2e": "start-server-and-test dev http-get://localhost:5173 cy:run-e2e"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.64.2",
