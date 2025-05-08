@@ -48,5 +48,6 @@ export default defineConfig({
       },
     },
   },
+  logLevel: 'silent',
   build: { rollupOptions: { external: ['/env.js'] } },
 })

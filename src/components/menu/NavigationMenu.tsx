@@ -10,11 +10,13 @@ const NavigationMenu = () => {
   return (
     <header>
       <Navbar bg="primary" variant="dark">
-        <Navbar.Brand href="/">
+        <Navbar.Brand href="/" data-testid="navigation-menu.logo">
           <img src={logo} className="logo" alt="Logo" />
         </Navbar.Brand>
         <Nav>
-          <Nav.Link href="/">{t('navigation-menu.home')}</Nav.Link>
+          <Nav.Link href="/" data-testid="navigation-menu.home">
+            {t('navigation-menu.home')}
+          </Nav.Link>
           {/*<Nav.Link href="/historicaldata">{t('navmenu.historical_data')}</Nav.Link>
           <Nav.Link href="/measurementslist">{t('navmenu.measurements_list')}</Nav.Link>*/}
         </Nav>
