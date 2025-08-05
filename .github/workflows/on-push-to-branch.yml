@@ -27,13 +27,13 @@ jobs:
       - name: Cypress run E2E tests
         uses: cypress-io/github-action@v6
         with:
-          install: false
+          install: true
           summary-title: E2E tests
       - run: killall -9 node
       - name: Cypress run component tests
         uses: cypress-io/github-action@v6
         with:
-          install: false
+          install: true
           component: true
           summary-title: Component tests
   build:
