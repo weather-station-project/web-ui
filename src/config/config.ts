@@ -61,14 +61,23 @@ export class Config {
     }
 
     this.otlp = {
-      rootUrl: 'http://localhost:4318',
-      debugInConsole: 'true' === 'true',
+      rootUrl: this.getValue('OTEL_EXPORTER_OTLP_ENDPOINT') || 'http://localhost:4318',
+      debugInConsole: this.getValueAsBoolean('OTEL_DEBUG_IN_CONSOLE'),
       attrs: {
         serviceName: 'wsp-web-ui',
-        serviceVersion: '0.0.1',
-        deploymentEnvironment: 'localhost',
+        serviceVersion: this.getValue('OTEL_SERVICE_VERSION') || '0.0.1',
+        deploymentEnvironment: this.getValue('OTEL_DEPLOYMENT_ENVIRONMENT') || 'localhost',
       },
     }
+  }
+
+  getValue(key: string): string | null {
+    return sessionStorage && sessionStorage.getItem(key) !== null ? (sessionStorage.getItem(key)?.trim() as string) : null
+  }
+
+  getValueAsBoolean(key: string): boolean {
+    const value: string | null = this.getValue(key)
+    return value !== null ? value.toLowerCase() === 'true' : false
   }
 }
 
