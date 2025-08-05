@@ -61,12 +61,12 @@ export class Config {
     }
 
     this.otlp = {
-      rootUrl: process.env.OTEL_EXPORTER_OTLP_ENDPOINT || 'http://localhost:4318',
-      debugInConsole: process.env.OTEL_DEBUG_IN_CONSOLE === 'true',
+      rootUrl: 'http://localhost:4318',
+      debugInConsole: 'true' === 'true',
       attrs: {
         serviceName: 'wsp-web-ui',
-        serviceVersion: process.env.OTEL_SERVICE_VERSION || '0.0.1',
-        deploymentEnvironment: process.env.OTEL_DEPLOYMENT_ENVIRONMENT || 'localhost',
+        serviceVersion: '0.0.1',
+        deploymentEnvironment: 'localhost',
       },
     }
   }
