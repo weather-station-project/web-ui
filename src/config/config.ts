@@ -21,11 +21,22 @@ interface ITimesConfig {
   toastDurationInMilliseconds: number
 }
 
+interface IOtlpConfig {
+  rootUrl: string
+  debugInConsole: boolean
+  attrs: {
+    serviceName: string
+    serviceVersion: string
+    deploymentEnvironment: string
+  }
+}
+
 export class Config {
   logging: ILoggingConfig
   backend: IBackendConfig
   socketEvents: ISocketEvents
   times: ITimesConfig
+  otlp: IOtlpConfig
 
   constructor() {
     this.logging = {
@@ -47,6 +58,16 @@ export class Config {
 
     this.times = {
       toastDurationInMilliseconds: 3000,
+    }
+
+    this.otlp = {
+      rootUrl: process.env.OTEL_EXPORTER_OTLP_ENDPOINT || 'http://localhost:4318',
+      debugInConsole: process.env.OTEL_DEBUG_IN_CONSOLE === 'true',
+      attrs: {
+        serviceName: 'wsp-web-ui',
+        serviceVersion: process.env.OTEL_SERVICE_VERSION || '0.0.1',
+        deploymentEnvironment: process.env.OTEL_DEPLOYMENT_ENVIRONMENT || 'localhost',
+      },
     }
   }
 }
