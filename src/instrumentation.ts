@@ -40,7 +40,6 @@ function getProcessors(): SpanProcessor[] {
   ]
 }
 
-// Registering instrumentations
 registerInstrumentations({
   instrumentations: [new UserInteractionInstrumentation(), new XMLHttpRequestInstrumentation(), new DocumentLoadInstrumentation()],
 })
