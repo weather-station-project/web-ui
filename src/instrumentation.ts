@@ -42,7 +42,10 @@ const loggerProvider = new LoggerProvider({
   processors: [new BatchLogRecordProcessor(logExporter)],
 })
 
-logs.setGlobalLoggerProvider(loggerProvider)
+if (!GlobalConfig.otlp.debugInConsole) {
+  logs.setGlobalLoggerProvider(loggerProvider)
+}
+
 const logger: Logger = logs.getLogger('instrumentation', GlobalConfig.otlp.attrs.serviceVersion)
 logger.emit({
   severityNumber: SeverityNumber.INFO,
