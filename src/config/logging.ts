@@ -41,36 +41,36 @@ export default class Log {
   }
 
   debug(name: string, message: string): void {
-    this.getLogger(name).emit({
-      severityNumber: SeverityNumber.DEBUG,
-      severityText: 'DEBUG',
-      body: `[${name}] [${getSessionId()}] - ${message}`,
-      attributes: { session_id: getSessionId() },
-    })
+    if (!GlobalConfig.otlp.debugInConsole) {
+      this.emit(name, SeverityNumber.DEBUG, 'debug', message)
+    }
 
     log.getLogger(name).debug(message)
   }
 
   info(name: string, message: string): void {
-    this.getLogger(name).emit({
-      severityNumber: SeverityNumber.INFO,
-      severityText: 'INFO',
-      body: `[${name}] [${getSessionId()}] - ${message}`,
-      attributes: { session_id: getSessionId() },
-    })
+    if (!GlobalConfig.otlp.debugInConsole) {
+      this.emit(name, SeverityNumber.INFO, 'info', message)
+    }
 
     log.getLogger(name).info(message)
   }
 
   error(name: string, message: string): void {
+    if (!GlobalConfig.otlp.debugInConsole) {
+      this.emit(name, SeverityNumber.ERROR, 'error', message)
+    }
+
+    log.getLogger(name).error(message)
+  }
+
+  private emit(name: string, severityNumber: SeverityNumber, severityText: string, message: string): void {
     this.getLogger(name).emit({
-      severityNumber: SeverityNumber.ERROR,
-      severityText: 'ERROR',
+      severityNumber: severityNumber,
+      severityText: severityText,
       body: `[${name}] [${getSessionId()}] - ${message}`,
       attributes: { session_id: getSessionId() },
     })
-
-    log.getLogger(name).error(message)
   }
 
   private getLogger(name: string): Logger {

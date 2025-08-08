@@ -6,7 +6,11 @@ import { UserInteractionInstrumentation } from '@opentelemetry/instrumentation-u
 import { XMLHttpRequestInstrumentation } from '@opentelemetry/instrumentation-xml-http-request'
 import { GlobalConfig } from './config/config.ts'
 import { detectResources, Resource, resourceFromAttributes } from '@opentelemetry/resources'
-import { ATTR_SERVICE_NAME, ATTR_SERVICE_VERSION, SemanticResourceAttributes } from '@opentelemetry/semantic-conventions'
+import {
+  ATTR_SERVICE_NAME,
+  ATTR_SERVICE_VERSION,
+  SemanticResourceAttributes
+} from '@opentelemetry/semantic-conventions'
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http'
 import { browserDetector } from '@opentelemetry/opentelemetry-browser-detector'
 import { diag, DiagConsoleLogger, DiagLogLevel } from '@opentelemetry/api'
@@ -75,6 +79,4 @@ registerInstrumentations({
   instrumentations: [new UserInteractionInstrumentation(), new XMLHttpRequestInstrumentation(), new DocumentLoadInstrumentation(), new FetchInstrumentation()],
 })
 
-if (!GlobalConfig.otlp.debugInConsole) {
-  Log.getInstance().debug('instrumentation', 'OTLP Logger initialized')
-}
+Log.getInstance().debug('instrumentation', 'OTLP Logger initialized')
