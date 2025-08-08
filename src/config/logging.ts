@@ -2,15 +2,30 @@ import { Logger, logs, SeverityNumber } from '@opentelemetry/api-logs'
 import { GlobalConfig } from './config.ts'
 import prefix from 'loglevel-plugin-prefix'
 import log from 'loglevel'
+import { getValueFromSessionStorageByKey, isValuePresentInSessionStorage } from '../helpers/sessionStorage.ts'
+
+const KEY: string = 'SESSION_ID'
+
+function getSessionId(): string {
+  if (isValuePresentInSessionStorage(KEY)) {
+    return getValueFromSessionStorageByKey(KEY)
+  }
+
+  const sessionId: string = crypto.randomUUID()
+  sessionStorage.setItem(KEY, sessionId)
+
+  return sessionId
+}
 
 export default class Log {
   private static instance: Log
 
   private constructor() {
     prefix.reg(log)
+
     prefix.apply(log, {
       format(level: string, name: string | undefined): string {
-        return `${level.toUpperCase()} [${name}] -`
+        return `${level.toUpperCase()} [${name}] [${getSessionId()}] -`
       },
     })
 
@@ -29,7 +44,8 @@ export default class Log {
     this.getLogger(name).emit({
       severityNumber: SeverityNumber.DEBUG,
       severityText: 'DEBUG',
-      body: message,
+      body: `[${name}] [${getSessionId()}] - ${message}`,
+      attributes: { session_id: getSessionId() },
     })
 
     log.getLogger(name).debug(message)
@@ -39,7 +55,8 @@ export default class Log {
     this.getLogger(name).emit({
       severityNumber: SeverityNumber.INFO,
       severityText: 'INFO',
-      body: message,
+      body: `[${name}] [${getSessionId()}] - ${message}`,
+      attributes: { session_id: getSessionId() },
     })
 
     log.getLogger(name).info(message)
@@ -49,7 +66,8 @@ export default class Log {
     this.getLogger(name).emit({
       severityNumber: SeverityNumber.ERROR,
       severityText: 'ERROR',
-      body: message,
+      body: `[${name}] [${getSessionId()}] - ${message}`,
+      attributes: { session_id: getSessionId() },
     })
 
     log.getLogger(name).error(message)

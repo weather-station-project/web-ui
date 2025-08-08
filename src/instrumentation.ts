@@ -6,15 +6,20 @@ import { UserInteractionInstrumentation } from '@opentelemetry/instrumentation-u
 import { XMLHttpRequestInstrumentation } from '@opentelemetry/instrumentation-xml-http-request'
 import { GlobalConfig } from './config/config.ts'
 import { detectResources, Resource, resourceFromAttributes } from '@opentelemetry/resources'
-import { ATTR_SERVICE_NAME, ATTR_SERVICE_VERSION, SemanticResourceAttributes } from '@opentelemetry/semantic-conventions'
+import {
+  ATTR_SERVICE_NAME,
+  ATTR_SERVICE_VERSION,
+  SemanticResourceAttributes
+} from '@opentelemetry/semantic-conventions'
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http'
 import { browserDetector } from '@opentelemetry/opentelemetry-browser-detector'
 import { diag, DiagConsoleLogger, DiagLogLevel } from '@opentelemetry/api'
 import { OTLPLogExporter } from '@opentelemetry/exporter-logs-otlp-http'
 import { BatchLogRecordProcessor, LoggerProvider } from '@opentelemetry/sdk-logs'
-import { Logger, logs, SeverityNumber } from '@opentelemetry/api-logs'
+import { logs } from '@opentelemetry/api-logs'
 import { CompositePropagator, W3CBaggagePropagator, W3CTraceContextPropagator } from '@opentelemetry/core'
 import { FetchInstrumentation } from '@opentelemetry/instrumentation-fetch'
+import Log from './config/logging.ts'
 
 /*
 Useful links:
@@ -46,13 +51,6 @@ if (!GlobalConfig.otlp.debugInConsole) {
   logs.setGlobalLoggerProvider(loggerProvider)
 }
 
-const logger: Logger = logs.getLogger('instrumentation', GlobalConfig.otlp.attrs.serviceVersion)
-logger.emit({
-  severityNumber: SeverityNumber.INFO,
-  severityText: 'INFO',
-  body: 'OTLP Logger initialized',
-})
-
 const provider = new WebTracerProvider({
   spanProcessors: getProcessors(),
   resource: resources,
@@ -80,3 +78,5 @@ function getProcessors(): SpanProcessor[] {
 registerInstrumentations({
   instrumentations: [new UserInteractionInstrumentation(), new XMLHttpRequestInstrumentation(), new DocumentLoadInstrumentation(), new FetchInstrumentation()],
 })
+
+Log.getInstance().debug('instrumentation', 'OTLP Logger initialized')
