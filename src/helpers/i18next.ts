@@ -1,11 +1,11 @@
 import { initReactI18next } from 'react-i18next'
 import Backend from 'i18next-http-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
-import { Logger } from 'loglevel'
-import log from '../config/logging.ts'
 import i18next from 'i18next'
+import Log from '../config/logging.ts'
 
-const localLog: Logger = log.getLogger('i18n')
+const localLog: Log = Log.getInstance()
+const NAME: string = 'i18next'
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
 export const DATETIME_FORMAT_OPTIONS = {
@@ -40,7 +40,7 @@ i18next
   })
 
 i18next.on('languageChanged', (lng) => {
-  localLog.debug(`Language changed to '${lng}'`)
+  localLog.debug(NAME, `Language changed to '${lng}'`)
 })
 
 export default i18next

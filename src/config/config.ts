@@ -1,9 +1,3 @@
-import log from 'loglevel'
-
-interface ILoggingConfig {
-  level: log.LogLevelDesc
-}
-
 interface IBackendConfig {
   maxAttempts: number
   delayInMilliseconds: number
@@ -32,17 +26,12 @@ interface IOtlpConfig {
 }
 
 export class Config {
-  logging: ILoggingConfig
   backend: IBackendConfig
   socketEvents: ISocketEvents
   times: ITimesConfig
   otlp: IOtlpConfig
 
   constructor() {
-    this.logging = {
-      level: 'debug' as unknown as log.LogLevelDesc,
-    }
-
     this.backend = {
       maxAttempts: 20,
       delayInMilliseconds: 1000,
