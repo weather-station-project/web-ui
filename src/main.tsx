@@ -4,16 +4,11 @@ import 'bootstrap/dist/css/bootstrap.css'
 import './styles/index.css'
 import { I18nextProvider } from 'react-i18next'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import log from './config/logging'
-import { Logger } from 'loglevel'
 import Loading from './components/generic/Loading.tsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/home/Home.tsx'
 import Layout from './components/generic/Layout.tsx'
 import i18next from './helpers/i18next.ts'
-
-const localLog: Logger = log.getLogger('main')
-localLog.debug('Starting application')
 
 // https://github.com/weather-station-project/dashboard/tree/master/Code/src/WeatherStationProject.Dashboard.App/ClientApp
 createRoot(document.getElementById('root')!).render(

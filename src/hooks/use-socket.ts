@@ -2,12 +2,11 @@ import { useEffect, useRef } from 'react'
 import { io, Socket } from 'socket.io-client'
 import { GlobalConfig } from '../config/config.ts'
 import { getToken, resetToken } from '../helpers/auth.ts'
-import { Logger } from 'loglevel'
 import retry, { RetryOperation } from 'retry'
-import log from '../config/logging.ts'
+import Log from '../config/logging.ts'
 import DisconnectReason = Socket.DisconnectReason
 
-// https://github.com/ingka-group-digital/pmp-rx-player/blob/cdf5c964b5efdb95a0d1ccfb0bc98ea524f2e44d/src/helpers/socket.helpers.ts
+const NAME: string = 'socket'
 
 interface ISocketError {
   status: string
@@ -23,7 +22,7 @@ const useSocket = (
   onWindMeasurement: (message: string) => void,
   onRainfall: (message: string) => void
 ): Socket => {
-  const logRef = useRef<Logger>(log.getLogger('socket'))
+  const logRef = useRef<Log>(Log.getInstance())
   const socketRef = useRef<Socket | null>(null)
   const tryingConnectionRef = useRef<boolean>(false)
 
@@ -39,15 +38,15 @@ const useSocket = (
       },
     })
 
-    logRef.current.debug('Created socket helper instance')
+    logRef.current.debug(NAME, 'Created socket helper instance')
 
     socketRef.current.on('connect', (): void => {
-      logRef.current.debug('Socket connected')
+      logRef.current.debug(NAME, 'Socket connected')
       onConnect()
     })
 
     socketRef.current.on('disconnect', (reason: DisconnectReason): void => {
-      logRef.current.debug(`Socket disconnected (${reason})`)
+      logRef.current.debug(NAME, `Socket disconnected (${reason})`)
       onDisconnect(reason)
     })
 
@@ -55,32 +54,32 @@ const useSocket = (
       const error: ISocketError = JSON.parse(message)
 
       if (error.status === 'ws_error') {
-        logRef.current.debug('Received WsException. Resetting token')
+        logRef.current.debug(NAME, 'Received WsException. Resetting token')
         resetToken()
       } else {
-        logRef.current.error(`On exception event: ${JSON.stringify(error)}`)
+        logRef.current.error(NAME, `On exception event: ${JSON.stringify(error)}`)
       }
 
       onException(message)
     })
 
     socketRef.current.on(GlobalConfig.socketEvents.airMeasurement, (message: string): void => {
-      logRef.current.debug(`Received air measurement: ${message}`)
+      logRef.current.debug(NAME, `Received air measurement: ${message}`)
       onAirMeasurement(message)
     })
 
     socketRef.current.on(GlobalConfig.socketEvents.groundTemperature, (message: string): void => {
-      logRef.current.debug(`Received ground temperature: ${message}`)
+      logRef.current.debug(NAME, `Received ground temperature: ${message}`)
       onGroundTemperature(message)
     })
 
     socketRef.current.on(GlobalConfig.socketEvents.windMeasurement, (message: string): void => {
-      logRef.current.debug(`Received wind measurement: ${message}`)
+      logRef.current.debug(NAME, `Received wind measurement: ${message}`)
       onWindMeasurement(message)
     })
 
     socketRef.current.on(GlobalConfig.socketEvents.rainfall, (message: string): void => {
-      logRef.current.debug(`Received rainfall: ${message}`)
+      logRef.current.debug(NAME, `Received rainfall: ${message}`)
       onRainfall(message)
     })
 
@@ -104,7 +103,7 @@ const useSocket = (
       if (socketRef.current?.connected) {
         return
       }
-      logRef.current.debug(`Connecting socket. Attempt (${currentAttempt}/${GlobalConfig.backend.maxAttempts})`)
+      logRef.current.debug(NAME, `Connecting socket. Attempt (${currentAttempt}/${GlobalConfig.backend.maxAttempts})`)
       socketRef.current?.connect()
 
       /*
@@ -115,7 +114,7 @@ const useSocket = (
       if (!operation.retry(socketRef.current?.connected ? undefined : new Error('Not connected'))) {
         tryingConnectionRef.current = false
         if (operation.attempts() === GlobalConfig.backend.maxAttempts) {
-          logRef.current.error(`Connection failed after ${GlobalConfig.backend.maxAttempts} attempts`)
+          logRef.current.error(NAME, `Connection failed after ${GlobalConfig.backend.maxAttempts} attempts`)
         }
         return
       }
@@ -128,7 +127,7 @@ const useSocket = (
 
     return (): void => {
       if (socket) {
-        localLog.debug('Destroying socket helper instance')
+        localLog.debug(NAME, 'Destroying socket helper instance')
         socket.disconnect()
       }
     }

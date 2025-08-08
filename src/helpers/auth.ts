@@ -1,9 +1,10 @@
-import { Logger } from 'loglevel'
-import log from '../config/logging.ts'
+import Log from '../config/logging.ts'
 import { getValueFromSessionStorageByKey, isValuePresentInSessionStorage } from './sessionStorage.ts'
 
 const AUTH_TOKEN_KEY: string = 'auth_token'
-const localLog: Logger = log.getLogger('auth helper')
+const NAME: string = 'i18next'
+
+const localLog: Log = Log.getInstance()
 
 export interface IToken {
   access_token: string
@@ -16,7 +17,7 @@ export async function getToken(): Promise<string | undefined> {
     return token
   }
 
-  localLog.debug('Getting token from the Backend Api')
+  localLog.debug(NAME, 'Getting token from the Backend Api')
   const response: Response = await fetch('/api/auth', { method: 'POST' })
 
   return await getTokenFromResponse(response)
@@ -43,6 +44,6 @@ async function getTokenFromResponse(response: Response): Promise<string | undefi
   }
 
   const errorMessage: string = `Error getting auth token: ${response.statusText} (${response.status})`
-  localLog.error(errorMessage)
+  localLog.error(NAME, errorMessage)
   return undefined
 }

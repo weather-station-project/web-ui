@@ -40,6 +40,23 @@ export default defineConfig({
           })
         },
       },
+      '^.*/otel': {
+        target: 'http://localhost:4318',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path: string): string => path.replace(/^\/otel/, ''),
+        configure: (proxy): void => {
+          proxy.on('error', (err): void => {
+            console.error('Proxy error: ', err)
+          })
+          proxy.on('proxyReq', (_proxyReq, req): void => {
+            console.log(`Sending request with method ${req.method} to ${req.url}`)
+          })
+          proxy.on('proxyRes', (proxyRes, req): void => {
+            console.log(`Received (${proxyRes.statusCode}) ${proxyRes.statusMessage} from the target ${req.url}`)
+          })
+        },
+      },
       '/socket.io': {
         target: 'http://localhost:8081',
         changeOrigin: true,
