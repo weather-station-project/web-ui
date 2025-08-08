@@ -7,8 +7,6 @@ import retry, { RetryOperation } from 'retry'
 import log from '../config/logging.ts'
 import DisconnectReason = Socket.DisconnectReason
 
-// https://github.com/ingka-group-digital/pmp-rx-player/blob/cdf5c964b5efdb95a0d1ccfb0bc98ea524f2e44d/src/helpers/socket.helpers.ts
-
 interface ISocketError {
   status: string
   message: string

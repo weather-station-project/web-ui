@@ -61,8 +61,8 @@ export class Config {
     }
 
     this.otlp = {
-      rootUrl: 'http://localhost:5173/otel', // This endpoint is not present, the call is redirected in the vite.config.ts
-      debugInConsole: this.isKeyPresent('OTEL_DEBUG_IN_CONSOLE') ? this.getValueAsBoolean('OTEL_DEBUG_IN_CONSOLE') : true,
+      rootUrl: this.getValue('OTEL_FAKE_ENDPOINT') || 'http://localhost:5173/otel', // This endpoint is not present, the call is redirected in vite.config.ts or nginx
+      debugInConsole: this.isKeyPresent('OTEL_DEBUG_IN_CONSOLE') ? this.getValueAsBoolean('OTEL_DEBUG_IN_CONSOLE') : false,
       attrs: {
         serviceName: 'wsp-web-ui',
         serviceVersion: this.getValue('OTEL_SERVICE_VERSION') || '0.0.1',
