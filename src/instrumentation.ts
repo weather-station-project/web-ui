@@ -6,7 +6,11 @@ import { UserInteractionInstrumentation } from '@opentelemetry/instrumentation-u
 import { XMLHttpRequestInstrumentation } from '@opentelemetry/instrumentation-xml-http-request'
 import { GlobalConfig } from './config/config.ts'
 import { detectResources, Resource, resourceFromAttributes } from '@opentelemetry/resources'
-import { ATTR_SERVICE_NAME, ATTR_SERVICE_VERSION, SemanticResourceAttributes } from '@opentelemetry/semantic-conventions'
+import {
+  ATTR_SERVICE_NAME,
+  ATTR_SERVICE_VERSION,
+  SemanticResourceAttributes
+} from '@opentelemetry/semantic-conventions'
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http'
 import { browserDetector } from '@opentelemetry/opentelemetry-browser-detector'
 import { diag, DiagConsoleLogger, DiagLogLevel } from '@opentelemetry/api'
@@ -28,14 +32,14 @@ Useful links:
 diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG)
 
 const resources: Resource = resourceFromAttributes({
-  [ATTR_SERVICE_NAME]: GlobalConfig.otlp.attrs.serviceName,
-  [ATTR_SERVICE_VERSION]: GlobalConfig.otlp.attrs.serviceVersion,
-  [SemanticResourceAttributes.DEPLOYMENT_ENVIRONMENT]: GlobalConfig.otlp.attrs.deploymentEnvironment,
+  [ATTR_SERVICE_NAME]: GlobalConfig.otel.attrs.serviceName,
+  [ATTR_SERVICE_VERSION]: GlobalConfig.otel.attrs.serviceVersion,
+  [SemanticResourceAttributes.DEPLOYMENT_ENVIRONMENT]: GlobalConfig.otel.attrs.deploymentEnvironment,
 }).merge(detectResources({ detectors: [browserDetector] }))
 
 // Configure logging to send to the collector via nginx
 const logExporter = new OTLPLogExporter({
-  url: `${GlobalConfig.otlp.rootUrl}/v1/logs`,
+  url: `${GlobalConfig.otel.rootUrl}/v1/logs`,
 })
 
 const loggerProvider = new LoggerProvider({
@@ -43,7 +47,7 @@ const loggerProvider = new LoggerProvider({
   processors: [new BatchLogRecordProcessor(logExporter)],
 })
 
-if (!GlobalConfig.otlp.debugInConsole) {
+if (!GlobalConfig.otel.debugInConsole) {
   logs.setGlobalLoggerProvider(loggerProvider)
 }
 
@@ -62,10 +66,10 @@ provider.register({
 function getProcessors(): SpanProcessor[] {
   return [
     new BatchSpanProcessor(
-      GlobalConfig.otlp.debugInConsole
+      GlobalConfig.otel.debugInConsole
         ? new ConsoleSpanExporter()
         : new OTLPTraceExporter({
-            url: `${GlobalConfig.otlp.rootUrl}/v1/traces`,
+            url: `${GlobalConfig.otel.rootUrl}/v1/traces`,
           })
     ),
   ]

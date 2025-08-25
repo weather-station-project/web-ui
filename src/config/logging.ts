@@ -41,7 +41,7 @@ export default class Log {
   }
 
   debug(name: string, message: string): void {
-    if (!GlobalConfig.otlp.debugInConsole) {
+    if (!GlobalConfig.otel.debugInConsole) {
       this.emit(name, SeverityNumber.DEBUG, 'debug', message)
     }
 
@@ -49,7 +49,7 @@ export default class Log {
   }
 
   info(name: string, message: string): void {
-    if (!GlobalConfig.otlp.debugInConsole) {
+    if (!GlobalConfig.otel.debugInConsole) {
       this.emit(name, SeverityNumber.INFO, 'info', message)
     }
 
@@ -57,7 +57,7 @@ export default class Log {
   }
 
   error(name: string, message: string): void {
-    if (!GlobalConfig.otlp.debugInConsole) {
+    if (!GlobalConfig.otel.debugInConsole) {
       this.emit(name, SeverityNumber.ERROR, 'error', message)
     }
 
@@ -74,6 +74,6 @@ export default class Log {
   }
 
   private getLogger(name: string): Logger {
-    return logs.getLogger(name, GlobalConfig.otlp.attrs.serviceVersion, { includeTraceContext: true })
+    return logs.getLogger(name, GlobalConfig.otel.attrs.serviceVersion, { includeTraceContext: true })
   }
 }

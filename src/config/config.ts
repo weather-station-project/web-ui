@@ -15,7 +15,7 @@ interface ITimesConfig {
   toastDurationInMilliseconds: number
 }
 
-interface IOtlpConfig {
+interface IOtelConfig {
   rootUrl: string
   debugInConsole: boolean
   attrs: {
@@ -29,7 +29,7 @@ export class Config {
   backend: IBackendConfig
   socketEvents: ISocketEvents
   times: ITimesConfig
-  otlp: IOtlpConfig
+  otel: IOtelConfig
 
   constructor() {
     this.backend = {
@@ -49,7 +49,7 @@ export class Config {
       toastDurationInMilliseconds: 3000,
     }
 
-    this.otlp = {
+    this.otel = {
       rootUrl: this.getValue('OTEL_FAKE_ENDPOINT') || 'http://localhost:5173/otel', // This endpoint is not present, the call is redirected in vite.config.ts or nginx
       debugInConsole: this.isKeyPresent('OTEL_DEBUG_IN_CONSOLE') ? this.getValueAsBoolean('OTEL_DEBUG_IN_CONSOLE') : true,
       attrs: {
