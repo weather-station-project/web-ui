@@ -17,8 +17,8 @@ const NavigationMenu = () => {
           <Nav.Link href="/" data-testid="navigation-menu.home">
             {t('navigation-menu.home')}
           </Nav.Link>
-          {/*<Nav.Link href="/historicaldata">{t('navmenu.historical_data')}</Nav.Link>
-          <Nav.Link href="/measurementslist">{t('navmenu.measurements_list')}</Nav.Link>*/}
+          <Nav.Link href="/historicaldata">{t('navigation-menu.historical-data')}</Nav.Link>
+          {/*<Nav.Link href="/measurementslist">{t('navmenu.measurements_list')}</Nav.Link>*/}
         </Nav>
         <Navbar.Collapse className="justify-content-end">
           <Nav>

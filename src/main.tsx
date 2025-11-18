@@ -6,9 +6,10 @@ import { I18nextProvider } from 'react-i18next'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Loading from './components/generic/Loading.tsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Home from './pages/home/Home.tsx'
+import Home from './pages/Home.tsx'
 import Layout from './components/generic/Layout.tsx'
 import i18next from './helpers/i18next.ts'
+import HistoricalData from './pages/HistoricalData.tsx'
 
 // https://github.com/weather-station-project/dashboard/tree/master/Code/src/WeatherStationProject.Dashboard.App/ClientApp
 createRoot(document.getElementById('root')!).render(
@@ -20,8 +21,8 @@ createRoot(document.getElementById('root')!).render(
           <Layout>
             <Routes>
               <Route path="/" element={<Home />} />
-              {/*<Route path="/historicaldata" element={<HistoricalData showChartViewAndGrouping={true} />} />
-        <Route path="/measurementslist" element={<HistoricalData showChartViewAndGrouping={false} />} />*/}
+              <Route path="/historicaldata" element={<HistoricalData />} />
+              {/*<Route path="/measurementslist" element={<HistoricalData showChartViewAndGrouping={false} />} />*/}
             </Routes>
           </Layout>
         </BrowserRouter>

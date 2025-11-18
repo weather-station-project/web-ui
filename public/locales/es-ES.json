@@ -1,7 +1,8 @@
 {
   "date": "{{value, datetime}}",
   "navigation-menu": {
-    "home": "Inicio"
+    "home": "Inicio",
+    "historical-data": "Datos históricos"
   },
   "language-selector": {
     "en-EN": "Inglés",
@@ -26,5 +27,9 @@
     "wind-speed": "Velocidad del viento",
     "wind-direction": "Dirección del viento",
     "rainfall": "Precipitaciones"
+  },
+  "historical-data": {
+    "title": "Historical data",
+    "description": "Historical data taken from the weather station"
   }
 }

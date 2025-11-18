@@ -1,13 +1,13 @@
-import useSocket from '../../hooks/use-socket.ts'
+import useSocket from '../hooks/use-socket.ts'
 import { Alert, Table } from 'react-bootstrap'
 import { useState } from 'react'
 import { Variant } from 'react-bootstrap/types'
 import { useTranslation } from 'react-i18next'
-import { GlobalConfig } from '../../config/config.ts'
+import { GlobalConfig } from '../config/config.ts'
 import { Socket } from 'socket.io-client'
-import { IAirMeasurement, IGroundTemperature, IRainfall, IWindMeasurement, reviver } from '../../models/models.ts'
+import { IAirMeasurement, IGroundTemperature, IRainfall, IWindMeasurement, reviver } from '../models/models.ts'
+import { DATETIME_FORMAT_OPTIONS } from '../helpers/i18next.ts'
 import DisconnectReason = Socket.DisconnectReason
-import { DATETIME_FORMAT_OPTIONS } from '../../helpers/i18next.ts'
 
 const Home = () => {
   const { t } = useTranslation()
